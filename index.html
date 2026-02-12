@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LUKTECH Hub | Automation Empire</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth;}
+body{font-family:'Segoe UI',sans-serif;background:#000;color:#e2e8f0;overflow-x:hidden;line-height:1.7;}
+
+/* Animated Tech Grid */
+body::before{
+  content:"";
+  position:fixed;width:100%;height:100%;
+  background:linear-gradient(rgba(0,255,136,0.05) 1px, transparent 1px),
+             linear-gradient(90deg, rgba(0,255,136,0.05) 1px, transparent 1px);
+  background-size:40px 40px;animation:moveGrid 10s linear infinite;z-index:-1;
+}
+@keyframes moveGrid{from{background-position:0 0;}to{background-position:40px 40px;}}
+
+/* Header & Live Banner */
+header{text-align:center;padding:100px 20px;}
+header h1{font-size:3.5rem;color:#00ff88;text-shadow:0 0 25px #00ff88;}
+header p{color:#94a3b8;font-size:1.4rem;margin-top:12px;}
+#live-banner span{
+  background:linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+  -webkit-background-clip:text;
+  color:transparent;
+  display:inline-block;
+  animation:rainbowMove 5s linear infinite, pulse 2s ease-in-out infinite;
+  font-weight:bold;
+  font-size:18px;
+  padding:12px;
+}
+@keyframes rainbowMove{0%{background-position:0%;}100%{background-position:100%;}}
+@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.1);}}
+
+/* Sections */
+section{padding:100px 20px;text-align:center;opacity:0;transform:translateY(40px);transition:opacity 1s ease, transform 1s ease;font-size:16px;}
+section.visible{opacity:1;transform:translateY(0);}
+h2{color:#00ff88;margin-bottom:25px;font-size:2rem;}
+
+/* Terminal */
+.terminal{background:#020617;color:#00ff88;font-family:monospace;padding:40px;border-radius:15px;max-width:95%;margin:auto;box-shadow:0 0 40px #00ff88 inset,0 0 40px #00ff88;min-height:200px;font-size:16px;position:relative;}
+.terminal::after{content:'';display:inline-block;width:10px;height:20px;background:#00ff88;margin-left:2px;animation:blink 1s infinite;vertical-align:bottom;}
+@keyframes blink{0%,50%,100%{opacity:1;}25%,75%{opacity:0;}}
+
+/* Services Grid */
+.services{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;max-width:1000px;margin:auto;}
+.card{background:#020617;padding:30px;border-radius:15px;box-shadow:0 0 20px #00ff88 inset;transition:0.4s;cursor:pointer;position:relative;}
+.card:hover{transform:translateY(-10px);box-shadow:0 0 35px #00ff88,0 0 50px #0aff9d;}
+
+/* Buttons */
+.whatsapp-btn,.social-btn{display:inline-block;margin:10px 8px;padding:15px 30px;background:#000;color:#00ff88;font-weight:bold;border-radius:30px;text-decoration:none;border:2px solid #00ff88;box-shadow:0 0 8px #00ff88;transition:0.3s;font-size:16px;}
+.social-btn i{margin-right:8px;}
+.whatsapp-btn:hover,.social-btn:hover{color:#000;background:#00ff88;box-shadow:0 0 15px #0aff9d,0 0 30px #0aff9d,0 0 50px #0aff9d;}
+
+/* Footer */
+footer{background:#020617;padding:35px;text-align:center;color:#94a3b8;font-size:15px;}
+
+/* Skill Bars */
+.skill-bar-container{background:#020617;border-radius:8px;height:12px;overflow:hidden;margin-bottom:15px;}
+.skill-bar{height:12px;width:0;background:#0aff9d;border-radius:8px;transition:width 1s ease;}
+
+/* Portfolio Carousel */
+.portfolio-carousel{overflow:hidden;position:relative;}
+.carousel-track{display:flex;transition:transform 0.5s ease;}
+.carousel-item{min-width:280px;margin:0 15px;background:#020617;padding:20px;border-radius:12px;box-shadow:0 0 25px #00ff88;text-align:center;}
+
+/* Testimonials Carousel */
+.testimonials{max-width:900px;margin:auto;position:relative;overflow:hidden;padding:35px 0;}
+.testimonial-item{display:none;text-align:center;padding:15px;font-size:15px;animation:fadeIn 1s ease;}
+.testimonial-item.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(15px);}to{opacity:1;transform:translateY(0);}}
+
+/* Contact Form */
+#contact-form{max-width:100%;margin:auto;background:#020617;padding:25px;border-radius:12px;box-shadow:0 0 25px #00ff88;}
+#contact-form input,#contact-form textarea{width:100%;padding:12px;margin-bottom:12px;border-radius:8px;border:1px solid #00ff88;background:#000;color:#00ff88;font-size:15px;}
+#contact-form button{width:100%;padding:15px;background:#00ff88;color:#000;font-weight:bold;border:none;border-radius:30px;cursor:pointer;transition:0.3s;font-size:16px;}
+#contact-form button:hover{background:#0aff9d;}
+
+/* Floating global reach button */
+#global-reach-btn{position:fixed;bottom:20px;right:20px;background:#00ff88;color:#000;font-weight:bold;padding:16px 28px;border-radius:50px;text-decoration:none;font-size:16px;box-shadow:0 0 20px #0aff9d,0 0 40px #0aff9d,0 0 60px #0aff9d;animation:floatBtn 2.5s ease-in-out infinite;z-index:9999;transition:0.3s;}
+#global-reach-btn:hover{background:#0aff9d;box-shadow:0 0 25px #0aff9d,0 0 40px #0aff9d,0 0 60px #0aff9d;}
+@keyframes floatBtn{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+
+/* Responsive */
+@media(max-width:768px){header h1{font-size:2.5rem;}h2{font-size:1.6rem;}section{font-size:15px;}.terminal{font-size:14px;padding:30px;}.whatsapp-btn,.social-btn{font-size:14px;padding:12px 25px;}#live-banner span{font-size:14px;}}
+@media(max-width:480px){header h1{font-size:2rem;}h2{font-size:1.4rem;}section{font-size:14px;}.terminal{font-size:12px;padding:25px;}.whatsapp-btn,.social-btn{font-size:12px;padding:10px 20px;}#live-banner span{font-size:12px;}}
+</style>
+</head>
+<body>
+
+<header>
+<h1>LUKTECH Hub</h1>
+<p>Automation • AI • Innovation | The Pearl of Africa 🇺🇬</p>
+</header>
+
+<!-- Rainbow Live Banner -->
+<div id="live-banner"><span>🚀 A Developer from Uganda | LUKTECH Hub | Premium Website Services</span></div>
+
+<!-- Social Buttons -->
+<div style="text-align:center;margin:20px 0;">
+  <a href="https://github.com/your-github-username" class="social-btn"><i class="fab fa-github"></i> GitHub</a>
+  <a href="mailto:luktechhub001@gmail.com" class="social-btn"><i class="fas fa-envelope"></i> Gmail</a>
+  <a href="https://wa.me/256784008515" class="social-btn"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+</div>
+
+<!-- About Founder -->
+<section>
+<h2>About the Founder</h2>
+<img src="https://chatgpt.com/s/m_698aea68005c81918bb2f874ae09e06b" alt="Luqman Luka" style="width:180px;height:180px;border-radius:50%;border:3px solid #00ff88;box-shadow:0 0 35px #00ff88;margin-bottom:20px;">
+<h3 style="color:#00ff88;">Luqman Luka 🇺🇬</h3>
+<p style="max-width:800px;margin:auto;line-height:1.7;font-size:16px;">
+LUKTECH Hub’s founder is a calm mastermind in website development. He can turn your website into a global business platform, publish and advertise your brand worldwide, and connect your business with customers globally.
+</p>
+
+<!-- Skill Bars -->
+<div style="max-width:700px;margin:40px auto 0;text-align:left;">
+<p style="color:#00ff88;margin-bottom:6px;">Web & App Development</p>
+<div class="skill-bar-container"><div class="skill-bar" data-width="90%"></div></div>
+<p style="color:#00ff88;margin-bottom:6px;">AI & Automation</p>
+<div class="skill-bar-container"><div class="skill-bar" data-width="85%"></div></div>
+<p style="color:#00ff88;margin-bottom:6px;">Cyber Security</p>
+<div class="skill-bar-container"><div class="skill-bar" data-width="80%"></div></div>
+<p style="color:#00ff88;margin-bottom:6px;">WhatsApp Automation</p>
+<div class="skill-bar-container"><div class="skill-bar" data-width="95%"></div></div>
+</div>
+</section>
+
+<!-- Terminal -->
+<section>
+<h2>Cyber Series: The Glitch</h2>
+<div class="terminal" id="terminal"></div>
+</section>
+
+<!-- Story -->
+<section>
+<h2>Story Created by LUKTECH-Hub Uganda</h2>
+<p style="max-width:800px;margin:auto;line-height:1.7;font-size:16px;">
+When AURAXIS attempted global domination, systems collapsed.<br>
+But in Uganda, Luka activated an unseen override protocol.<br>
+A calm mastermind fighting an artificial empire.<br>
+The digital war had begun.
+</p>
+</section>
+
+<!-- Services with WhatsApp redirect -->
+<section>
+<h2>Our Services</h2>
+<div class="services">
+  <div class="card" onclick="sendWhatsApp('WhatsApp Automation')">
+    <h3>WhatsApp Automation</h3>
+    <p>Custom bots, smart replies, workflow automation and scalable messaging systems.</p>
+  </div>
+  <div class="card" onclick="sendWhatsApp('AI Integration')">
+    <h3>AI Integration</h3>
+    <p>AI-powered systems for business intelligence, chat automation and smart analytics.</p>
+  </div>
+  <div class="card" onclick="sendWhatsApp('Web & App Development')">
+    <h3>Web & App Development</h3>
+    <p>Modern websites, dashboards and digital platforms built using latest technologies.</p>
+  </div>
+  <div class="card" onclick="sendWhatsApp('Cyber Systems')">
+    <h3>Cyber Systems</h3>
+    <p>Secure infrastructure, server deployment and digital defense architecture.</p>
+  </div>
+</div>
+<a href="https://wa.me/256784008515" class="whatsapp-btn" target="_blank">Chat Us on WhatsApp</a>
+</section>
+
+<!-- Contact -->
+<section>
+<h2>Contact & Global Reach</h2>
+<form id="contact-form">
+<input type="text" placeholder="Your Name" required>
+<input type="email" placeholder="Your Email" required>
+<textarea rows="5" placeholder="Your Message" required></textarea>
+<button type="submit">Send Message</button>
+</form>
+</section>
+
+<footer>© 2026 LUKTECH Hub | Powered by Luqman Luka</footer>
+<a href="https://wa.me/256784008515" target="_blank" id="global-reach-btn">🌍 Reach Me Globally</a>
+
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<script>
+// Terminal Animation
+const lines=["> Initializing Override...","> Detecting AURAXIS...","> Firewall breached...","> Encryption cracked...","> Counter-Protocol engaged...","> ACCESS GRANTED","> Luka: Calm. Strategic. Unmatched.","> The Glitch has begun..."];
+let i=0,j=0;
+const terminal=document.getElementById("terminal");
+function typeEffect(){if(i<lines.length){if(j<lines[i].length){terminal.innerHTML+=lines[i][j];j++;setTimeout(typeEffect,30);}else{terminal.innerHTML+="<br>";i++; j=0;setTimeout(typeEffect,500);}}}
+typeEffect();
+
+// Scroll Reveal + Skill Bars
+const sections=document.querySelectorAll("section");
+window.addEventListener("scroll",()=>{
+  const trigger=window.innerHeight/1.2;
+  sections.forEach(sec=>{
+    if(sec.getBoundingClientRect().top<trigger){
+      sec.classList.add("visible");
+      const skillBars=sec.querySelectorAll('.skill-bar');
+      skillBars.forEach(bar=>{bar.style.width=bar.getAttribute('data-width');});
+    }
+  });
+});
+
+// WhatsApp automated message function
+function sendWhatsApp(service) {
+  const number = "256784008515"; 
+  const message = `Hello! I am interested in your "${service}" service. Please provide more details.`;
+  const url = `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
+  window.open(url, "_blank");
+}
+
+// Contact Form
+const form=document.getElementById('contact-form');
+form.addEventListener('submit',function(e){e.preventDefault();alert("Thank you! Message sent successfully."); form.reset();});
+</script>
+</body>
+</html>
